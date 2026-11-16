@@ -1,0 +1,64 @@
+:root { color-scheme: light; }
+.theme-toggle {
+ display: inline-grid; place-items: center; flex: 0 0 42px;
+ width: 42px; height: 42px; padding: 0; border: 1px solid var(--color-primary);
+ border-radius: 50%; background: var(--color-bg); color: var(--color-primary);
+ font: inherit; font-size: 25px; line-height: 1; cursor: pointer;
+}
+.theme-toggle:hover { background: var(--color-info-bg); }
+[data-theme="dark"] {
+ color-scheme: dark;
+ --color-bg: #19161b;
+ --color-text: #f1eaf0;
+ --color-muted: #beb0bb;
+ --color-surface: #262128;
+ --color-border: #51414d;
+ --color-header-bg: #31212d;
+ --color-info-bg: #35232e;
+ --color-filters-bg: #2b2029;
+ --color-brand-pink: #c86b9c;
+ --color-primary-dark: #91275f;
+ --color-danger: #ff91a9;
+ --color-success: #76c78c;
+ --color-success-bg: #243b2c;
+}
+[data-theme="dark"] .theme-toggle,
+[data-theme="dark"] .button--secondary,
+[data-theme="dark"] .breadcrumbs__link,
+[data-theme="dark"] .site-nav__link:not(.site-nav__link--active),
+[data-theme="dark"] .about-stats__value { color: #f3a4d0; }
+[data-theme="dark"] .button--secondary:hover { color: #fff; }
+[data-theme="dark"] .site-header__logo,
+[data-theme="dark"] .site-header__logo:hover { color: #21131c; }
+[data-theme="dark"] .hero::before { background: rgba(25, 18, 25, .7); }
+[data-theme="dark"] .review-card,
+[data-theme="dark"] .review-form,
+[data-theme="dark"] .promo-box,
+[data-theme="dark"] .checkout__total,
+[data-theme="dark"] .product-table tbody tr {
+ background: var(--color-surface); border-color: var(--color-border);
+}
+[data-theme="dark"] .product-table tbody th,
+[data-theme="dark"] .reviews__score strong { color: var(--color-text); }
+[data-theme="dark"] .review-card small { color: var(--color-muted); }
+[data-theme="dark"] .checkout__grand { border-color: var(--color-border); }
+[data-theme="dark"] .favorite-button,
+[data-theme="dark"] .nav-counter {
+ background: #402635; color: #ffb8d4; border-color: #85516b;
+}
+[data-theme="dark"] .favorite-button[aria-pressed="true"] { background: #69304d; color: #ffd6e6; }
+[data-theme="dark"] .product-card__photo,
+[data-theme="dark"] .product-card__image { background-color: var(--color-surface); }
+[data-theme="dark"] .cart-control__quantity { background: #243b2c; color: #b4e6bf; border-color: #507d5c; }
+[data-theme="dark"] .cart-control__step:hover { background: #35513d; }
+[data-theme="dark"] .menu-toggle,
+[data-theme="dark"] .shop-toast {
+ background: var(--color-surface); color: #ffb8d4; border-color: #85516b;
+}
+[data-theme="dark"] .field-error { color: #ff91a9; }
+[data-theme="dark"] :is(#order-status, #promo-status, #review-status) { color: #f3a4d0; }
+[data-theme="dark"] :focus-visible { outline-color: #f3a4d0; }
+@media (max-width: 767px) {
+ .site-header__inner { gap: 12px; }
+ .theme-toggle { margin-left: auto; }
+}

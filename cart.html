@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+<script src="js/theme.js"></script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Контактная информация учебного интернет-магазина." name="description"/>
+<title>Корзина — ForCats</title>
+<link href="css/style.css" rel="stylesheet"/>
+<meta content="website" property="og:type"/>
+<meta content="Учебный интернет-магазин" property="og:title"/>
+<meta content="Учебный frontend-проект интернет-магазина." property="og:description"/>
+<link href="css/responsive.css" rel="stylesheet"/><script defer="" src="js/data.js"></script><script defer="" src="js/store.js"></script><script defer="" src="js/main.js"></script><script defer="" src="js/navigation.js"></script><script defer="" src="js/cart.js"></script><link href="css/theme.css" rel="stylesheet"/></head>
+<body data-page="cart"><a class="skip-link" href="#main-content">Перейти к содержимому</a><div class="chat-window" hidden="" id="chat-window">
+<div class="chat-window__header">
+<span class="chat-window__title">Чат с магазином</span>
+<button aria-label="Закрыть чат" class="chat-window__close" id="chat-close" type="button">
+        ✕
+      </button>
+</div>
+<div class="chat-window__body">
+<p class="chat-window__message chat-window__message--bot">
+        Здравствуйте! Чем можем помочь?
+      </p>
+<p class="chat-window__message chat-window__message--user">
+        Хочу узнать о доставке.
+      </p>
+<p class="chat-window__message chat-window__message--bot">
+        Доставка по Москве — 1–2 дня, по России — 3–7 дней.
+      </p>
+</div>
+<div class="chat-window__footer">
+<p class="chat-window__note">Это учебный чат. Отправка сообщений не работает.</p>
+</div>
+</div><button aria-label="Открыть чат" class="chat-button" id="chat-toggle" type="button">
+<img alt="" class="chat-button__icon" height="100" loading="lazy" src="images/chat-icon.png" width="100"/>
+</button>
+<header class="site-header">
+<div class="site-header__inner">
+<a class="site-header__logo" href="index.html">ForCats</a>
+<button aria-label="Включить тёмную тему" aria-pressed="false" class="theme-toggle" id="theme-toggle" title="Тёмная тема" type="button">☾</button>
+<button aria-controls="primary-navigation" aria-expanded="false" aria-label="Открыть меню" class="menu-toggle" id="menu-toggle" type="button"><span aria-hidden="true" class="menu-toggle__bars"><span></span><span></span><span></span></span><span class="menu-toggle__text">меню</span></button><nav aria-label="Основная навигация" class="site-nav" id="primary-navigation"><ul class="site-nav__list"><li class="site-nav__item"><a class="site-nav__link" href="index.html">Главная</a></li><li class="site-nav__item"><a class="site-nav__link" href="catalog.html">Каталог</a></li><li class="site-nav__item"><a class="site-nav__link" href="about.html">О нас</a></li><li class="site-nav__item"><a aria-current="page" class="site-nav__link site-nav__link--active" href="contacts.html">Контакты</a></li><li class="site-nav__item"><a class="site-nav__link" href="order.html">Заявка</a></li><li class="site-nav__item"><a aria-label="Избранное" class="site-nav__link site-nav__link--utility" href="favorites.html"><span class="nav-symbol">♡</span><span class="nav-utility-label">Избранное</span><span class="nav-counter" data-fav-count="">0</span></a></li><li class="site-nav__item"><a aria-current="page" aria-label="Корзина" class="site-nav__link site-nav__link--utility site-nav__link--active" href="cart.html"><span class="nav-symbol nav-symbol--cart" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false"><circle cx="9" cy="20" r="1"/><circle cx="19" cy="20" r="1"/><path d="M2 3h2l2.6 12.1a2 2 0 0 0 2 1.6h10a2 2 0 0 0 2-1.6L22 7H5"/></svg></span><span class="nav-utility-label">Корзина</span><span class="nav-counter" data-cart-count="">0</span></a></li></ul></nav>
+</div>
+</header>
+<main id="main-content"><section class="section saved-page"><h1>Ваша корзина</h1><p>Здесь сохраняются выбранные товары. Данные хранятся только в вашем браузере.</p><p id="saved-empty">Пока здесь пусто. Загляните в каталог и выберите что-нибудь для кошки!</p><div class="saved-products" id="saved-products"></div><div class="cart-summary"><strong id="cart-total"></strong><a class="button button--primary" href="order.html" id="cart-checkout">Перейти к заявке</a></div><a class="button button--secondary" href="catalog.html">В каталог</a></section></main>
+<footer class="site-footer">
+<div class="site-footer__inner">
+<p>© 2026 Учебный проект. Все права защищены.</p>
+<p>Дисциплина: Фронтенд и бэкенд разработка</p>
+</div>
+</footer>
+</body>
+</html>

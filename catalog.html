@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+<script src="js/theme.js"></script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Каталог товаров учебного интернет-магазина." name="description"/>
+<title>Каталог товаров — Учебный интернет-магазин</title>
+<link href="css/style.css" rel="stylesheet"/>
+
+<meta content="website" property="og:type"/>
+<meta content="Учебный интернет-магазин" property="og:title"/>
+<meta content="Учебный frontend-проект интернет-магазина." property="og:description"/>
+<link href="css/responsive.css" rel="stylesheet"/><script defer="" src="js/data.js"></script><script defer="" src="js/store.js"></script><script defer="" src="js/main.js"></script><script defer="" src="js/navigation.js"></script><script defer="" src="js/catalog.js"></script><link href="css/theme.css" rel="stylesheet"/></head>
+<body><a class="skip-link" href="#main-content">Перейти к содержимому</a>
+<header class="site-header">
+<div class="site-header__inner">
+<a class="site-header__logo" href="index.html">ForCats</a>
+<button aria-label="Включить тёмную тему" aria-pressed="false" class="theme-toggle" id="theme-toggle" title="Тёмная тема" type="button">☾</button>
+<button aria-controls="primary-navigation" aria-expanded="false" aria-label="Открыть меню" class="menu-toggle" id="menu-toggle" type="button"><span aria-hidden="true" class="menu-toggle__bars"><span></span><span></span><span></span></span><span class="menu-toggle__text">меню</span></button><nav aria-label="Основная навигация" class="site-nav" id="primary-navigation"><ul class="site-nav__list"><li class="site-nav__item"><a class="site-nav__link" href="index.html">Главная</a></li><li class="site-nav__item"><a aria-current="page" class="site-nav__link site-nav__link--active" href="catalog.html">Каталог</a></li><li class="site-nav__item"><a class="site-nav__link" href="about.html">О нас</a></li><li class="site-nav__item"><a class="site-nav__link" href="contacts.html">Контакты</a></li><li class="site-nav__item"><a class="site-nav__link" href="order.html">Заявка</a></li><li class="site-nav__item"><a aria-label="Избранное" class="site-nav__link site-nav__link--utility" href="favorites.html"><span class="nav-symbol">♡</span><span class="nav-utility-label">Избранное</span><span class="nav-counter" data-fav-count="">0</span></a></li><li class="site-nav__item"><a aria-label="Корзина" class="site-nav__link site-nav__link--utility" href="cart.html"><span class="nav-symbol nav-symbol--cart" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false"><circle cx="9" cy="20" r="1"/><circle cx="19" cy="20" r="1"/><path d="M2 3h2l2.6 12.1a2 2 0 0 0 2 1.6h10a2 2 0 0 0 2-1.6L22 7H5"/></svg></span><span class="nav-utility-label">Корзина</span><span class="nav-counter" data-cart-count="">0</span></a></li></ul></nav>
+</div>
+</header>
+<main id="main-content">
+<nav aria-label="Хлебные крошки" class="breadcrumbs">
+<a class="breadcrumbs__link" href="index.html">Главная</a>
+<span class="breadcrumbs__current">Каталог</span>
+</nav>
+<section class="section">
+<h1>Каталог товаров</h1>
+<p>Выбирайте товары для ваших пушистиков: ищите по названию, категории и цене.</p>
+
+
+</section>
+<section class="catalog-layout">
+<div aria-labelledby="filters-heading" class="catalog-filters">
+<h2 id="filters-heading">Фильтры</h2>
+<form action="#" class="filters-form" method="get">
+<div class="filter-field">
+<label for="catalog-search">Поиск по названию</label>
+<input autocomplete="off" id="catalog-search" placeholder="Например, когтеточка" type="search"/>
+</div>
+<div class="filter-field">
+<label for="category-filter">Категория</label>
+<select class="catalog-select" id="category-filter"><option value="all">Все товары</option><option value="food">Корм</option><option value="toys">Игрушки</option><option value="accessories">Аксессуары</option><option value="care">Уход</option></select>
+</div>
+<div class="filter-field">
+<label for="sort-select">Сортировка</label>
+<select class="catalog-select" id="sort-select"><option value="default">По умолчанию</option><option value="price-asc">Сначала дешевле</option><option value="price-desc">Сначала дороже</option><option value="title-asc">По названию</option></select>
+</div>
+<fieldset class="filter-price">
+<legend>Цена, руб.</legend>
+<div class="filter-price__fields">
+<div class="filter-field"><label for="price-from">От</label><input id="price-from" min="0" name="price-from" placeholder="0" type="number"/></div>
+<div class="filter-field"><label for="price-to">До</label><input id="price-to" min="0" name="price-to" placeholder="5000" type="number"/></div>
+</div>
+</fieldset>
+<div class="filter-actions">
+<button class="button button--primary" type="submit">Применить фильтры</button>
+<button class="button button--secondary" id="reset-filters" type="button">Сбросить фильтры</button>
+</div>
+</form>
+</div>
+<div class="catalog-products">
+<h2>Список товаров</h2>
+<p aria-live="polite" class="catalog-count"></p><p class="catalog-empty" hidden="">По выбранным условиям ничего не найдено. Попробуйте изменить фильтры.</p><div class="products-grid" data-products-container=""></div>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="site-footer__inner">
+<p>© 2026 Учебный проект. Все права защищены.</p>
+<p>Дисциплина: Фронтенд и бэкенд разработка</p>
+</div>
+</footer>
+<button aria-label="Открыть чат" class="chat-button" id="chat-toggle" type="button">
+<img alt="" class="chat-button__icon" height="100" loading="lazy" src="images/chat-icon.png" width="100"/>
+</button>
+<div class="chat-window" hidden="" id="chat-window">
+<div class="chat-window__header">
+<span class="chat-window__title">Чат с магазином</span>
+<button aria-label="Закрыть чат" class="chat-window__close" id="chat-close" type="button">✕</button>
+</div>
+<div class="chat-window__body">
+<p class="chat-window__message chat-window__message--bot">Здравствуйте! Чем можем помочь?</p>
+<p class="chat-window__message chat-window__message--user">Хочу узнать о доставке.</p>
+<p class="chat-window__message chat-window__message--bot">Доставка по Москве — 1–2 дня, по России — 3–7 дней.</p>
+</div>
+<div class="chat-window__footer">
+<p class="chat-window__note">Это учебный чат. Отправка сообщений не работает.</p>
+</div>
+</div>
+</body>
+</html>
