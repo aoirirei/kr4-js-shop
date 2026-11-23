@@ -5,27 +5,35 @@ const categoryNames = {
   care: 'Уход',
   toys: 'Игрушки'
 };
+// Округляет цену и оформляет её строкой с «руб.».
 function formatPrice(price) {
   return `${Math.round(price).toLocaleString('ru-RU')} руб.`;
 }
+// Считает размер скидки в рублях.
 function calculateDiscount(price, percent) {
   return Math.round((price * percent) / 100);
 }
+// Возвращает цену товара после скидки.
 function calculateFinalPrice(price, percent) {
   return price - calculateDiscount(price, percent);
 }
+// Возвращает текст о наличии товара.
 function getProductStatus(item) {
   return item.isAvailable ? 'В наличии' : 'Нет в наличии';
 }
+// Собирает краткое описание товара с ценой и наличием.
 function createProductSummary(item) {
   return `${item.title}: ${formatPrice(calculateFinalPrice(item.price, item.discountPercent))}. ${getProductStatus(item)}.`;
 }
+// Возвращает массив названий товаров.
 function getProductTitles(data) {
   return data.map(item => item.title);
 }
+// Оставляет только товары в наличии.
 function getAvailableProducts(data) {
   return data.filter(item => item.isAvailable);
 }
+// Ищет товары по части названия без учёта регистра.
 function searchProducts(data, query) {
   const searchQuery = String(query).trim().toLocaleLowerCase('ru');
   if (!searchQuery) {
@@ -36,12 +44,13 @@ function searchProducts(data, query) {
     return title.includes(searchQuery);
   });
 }
+// Оставляет товары выбранной категории; all означает все категории.
 function filterProductsByCategory(data, category) {
   return category === 'all'
     ? data
     : data.filter(item => item.category === category);
 }
-// Сортируем копию, чтобы сохранить исходный порядок массива товаров.
+// Сортирует копию массива по цене со скидкой: asc — вверх, desc — вниз.
 function sortProductsByPrice(data, direction = 'asc') {
   const sortedProducts = [...data];
   sortedProducts.sort((firstProduct, secondProduct) => {
@@ -60,6 +69,7 @@ function sortProductsByPrice(data, direction = 'asc') {
   });
   return sortedProducts;
 }
+// Выбирает сортировку по цене, названию или сохраняет исходный порядок.
 function sortProducts(data, type = 'default') {
   if (type === 'price-asc') {
     return sortProductsByPrice(data);
@@ -72,21 +82,26 @@ function sortProducts(data, type = 'default') {
   }
   return [...data];
 }
+// Находит один товар по его ID.
 function findProductById(data, id) {
   return data.find(item => item.id === Number(id));
 }
+// Суммирует цены товаров со скидками, без учёта количества в корзине.
 function calculateTotalPrice(data) {
   return data.reduce(
     (sum, item) => sum + calculateFinalPrice(item.price, item.discountPercent),
     0
   );
 }
+// Считает количество товаров в наличии.
 function countAvailableProducts(data) {
   return getAvailableProducts(data).length;
 }
+// Считает среднюю цену со скидками; для пустого массива возвращает 0.
 function calculateAveragePrice(data) {
   return data.length ? Math.round(calculateTotalPrice(data) / data.length) : 0;
 }
+// Последовательно применяет поиск, фильтр по категории и сортировку.
 function getPreparedProducts(data, state) {
   // Поиск → фильтр по категории → сортировка.
   const searchResults = searchProducts(data, state.query);
@@ -99,7 +114,7 @@ function getPreparedProducts(data, state) {
 }
 const CART_KEY = 'forcats-cart-v4';
 const FAVORITES_KEY = 'forcats-favorites-v4';
-// Если сохранённые данные повреждены или хранилище недоступно, возвращаем пустой массив.
+// Читает массив из localStorage; при ошибке возвращает пустой массив.
 function readSaved(key) {
   try {
     const value = JSON.parse(localStorage.getItem(key) || '[]');
@@ -108,6 +123,7 @@ function readSaved(key) {
     return [];
   }
 }
+// Сохраняет данные в localStorage и сообщает странице об обновлении.
 function writeSaved(key, value) {
   try {
     localStorage.setItem(key, JSON.stringify(value));
@@ -117,7 +133,7 @@ function writeSaved(key, value) {
   // Сообщаем странице, что нужно обновить корзину, счётчики и кнопки.
   window.dispatchEvent(new Event('forcats:update'));
 }
-// Проверяем сохранённые записи: товар существует, количество — от 1 до 20.
+// Читает корзину и оставляет существующие товары с количеством от 1 до 20.
 function getCart() {
   return readSaved(CART_KEY).filter(
     row =>
@@ -130,11 +146,13 @@ function getCart() {
       findProductById(products, row.id)
   );
 }
+// Возвращает ID существующих товаров из сохранённого избранного.
 function getFavorites() {
   return readSaved(FAVORITES_KEY).filter(
     id => Number.isInteger(id) && findProductById(products, id)
   );
 }
+// Добавляет доступный товар в корзину или увеличивает количество до 20.
 function addToCart(id) {
   const item = findProductById(products, id);
   if (!item?.isAvailable) {
@@ -150,6 +168,7 @@ function addToCart(id) {
   writeSaved(CART_KEY, cart);
   showToast(`${item.title} добавлен в корзину`);
 }
+// Меняет количество товара в корзине; при количестве 0 или меньше удаляет его.
 function setCartQuantity(id, quantity) {
   let cart = getCart();
   if (quantity <= 0) {
@@ -161,6 +180,7 @@ function setCartQuantity(id, quantity) {
   }
   writeSaved(CART_KEY, cart);
 }
+// Добавляет товар в избранное или удаляет его, если он уже там есть.
 function toggleFavorite(id) {
   const saved = getFavorites();
   writeSaved(
@@ -168,6 +188,7 @@ function toggleFavorite(id) {
     saved.includes(id) ? saved.filter(x => x !== id) : [...saved, id]
   );
 }
+// Считает сумму корзины с учётом скидок и количества товаров.
 function cartTotal() {
   return getCart().reduce((sum, row) => {
     const p = findProductById(products, row.id);
@@ -177,7 +198,7 @@ function cartTotal() {
     );
   }, 0);
 }
-// Создаём кнопку добавления и кнопки изменения количества товара.
+// Создаёт кнопку добавления в корзину и кнопки изменения количества.
 function createCartControl(item) {
   const control = make('div', 'cart-control');
   control.dataset.cartControl = String(item.id);
@@ -209,6 +230,7 @@ function createCartControl(item) {
   updateCartControl(control, item);
   return control;
 }
+// Обновляет количество, видимость и доступность кнопок одного товара.
 function updateCartControl(control, item) {
   const count = getCart().find(row => row.id === item.id)?.quantity || 0;
   const add = control.querySelector('.cart-control__add');
@@ -230,6 +252,7 @@ function updateCartControl(control, item) {
     }
   }
 }
+// Обновляет элементы управления корзиной у всех товаров на странице.
 function updateCartButtons() {
   document.querySelectorAll('[data-cart-control]').forEach(control => {
     const item = findProductById(products, control.dataset.cartControl);
@@ -238,6 +261,7 @@ function updateCartButtons() {
     }
   });
 }
+// Обновляет счётчики корзины и избранного на странице.
 function updateBadges() {
   document
     .querySelectorAll('[data-cart-count]')
@@ -249,6 +273,7 @@ function updateBadges() {
     .querySelectorAll('[data-fav-count]')
     .forEach(el => (el.textContent = String(getFavorites().length)));
 }
+// Показывает текст уведомления, при необходимости создаёт его элемент.
 function showToast(message) {
   let el = document.querySelector('#shop-toast');
   if (!el) {
@@ -260,6 +285,7 @@ function showToast(message) {
   }
   el.textContent = message;
 }
+// Создаёт HTML-элемент с указанными тегом, CSS-классом и текстом.
 function make(tag, css, text) {
   const el = document.createElement(tag);
   if (css) {
@@ -270,7 +296,7 @@ function make(tag, css, text) {
   }
   return el;
 }
-// Собираем карточку товара из элементов DOM.
+// Создаёт карточку товара с фото, ценой и кнопками корзины и избранного.
 function createProductCard(item) {
   const card = make('article', 'product-card');
   const photoLink = make('a', 'product-card__photo');
